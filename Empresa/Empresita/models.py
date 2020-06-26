@@ -3,10 +3,12 @@ from django.db import models
 # Create your models here.
 
 class Direccion(models.Model):
-    Numero = models.CharField(max_length = 50, default="")
-    calle = models.IntegerField(null=True)
+    numero = models.IntegerField(null=True)
+    calle = models.CharField(max_length = 50, default="")
     comuna = models.CharField(max_length = 50, default="")
     ciudad = models.CharField(max_length = 50, default="")
+    def __str__(self):
+        return str(self.ciudad)
 
 class Proveedor(models.Model):
     nombre = models.CharField(max_length = 50, default="")
@@ -22,6 +24,9 @@ class Categoria(models.Model):
     nombre = models.CharField(max_length=50, default="")
     descripcion = models.CharField(max_length=50, default="")
 
+    def __str__(self):
+        return str(self.nombre)
+
 class Producto(models.Model):
     nombre = models.CharField(max_length = 50, default = "")
     precio = models.FloatField(null = True)
@@ -34,14 +39,13 @@ class Producto(models.Model):
 
 class Venta(models.Model):
     fecha = models.DateField()
+    producto = models.ForeignKey('Producto', on_delete=models.CASCADE)
     cantidad = models.IntegerField(null=False)
     descuento = models.FloatField(null = True)
     monto_final = models.FloatField(null = True)
-    cantidad = models.IntegerField(null = False)
-    producto = models.ForeignKey('Producto', on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.producto, self.cantidad)
+        return str(self.producto) + " Stock = " + str(self.cantidad)
 
 class Cliente(models.Model):
     nombre = models.CharField(max_length=50, default="")
