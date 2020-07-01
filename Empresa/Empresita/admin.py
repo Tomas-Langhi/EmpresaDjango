@@ -3,7 +3,7 @@ from Empresita.models import *
 
 
 class ClienteAdmin(admin.ModelAdmin):
-    #Previsualisacion de datos
+    #Previsualizacion de datos
     list_display = ['nombre', 'telefono', 'rut',]
 
 class ProductoAdmin(admin.ModelAdmin):
@@ -21,20 +21,21 @@ class ProductoAdmin(admin.ModelAdmin):
     )
 
 class ProveedorAdmin(admin.ModelAdmin):
-    #Previsualisacion de datos
+    #Previsualizacion de datos
     list_display = ['nombre', 'rut', 'telefono', 'web', 'direccion']
 
     #Filtro de busqueda
     search_fields = ['nombre', 'rut',]
 
-#class VentaAdmin(admin.ModelAdmin):
-
+class VentaAdmin(admin.ModelAdmin):
+    #previsualizacion de datos
+    list_display = ['cliente', 'producto', 'cantidad', 'desc', 'monto_final', 'fecha']
 
 
 
 
 # Register your models here.
-admin.site.register(Venta,)
+admin.site.register(Venta, VentaAdmin,)
 admin.site.register(Cliente, ClienteAdmin,)
 admin.site.register(Proveedor, ProveedorAdmin,)
 admin.site.register(Producto, ProductoAdmin,)

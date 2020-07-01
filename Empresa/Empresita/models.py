@@ -56,3 +56,12 @@ class Venta(models.Model):
 
     def __str__(self):
         return str(self.producto) + " Stock = " + str(self.cantidad)
+    
+    #Para diferenciar si tiene descuento o no
+    def desc(self):
+        if self.descuento == True:
+            return True
+        else:
+            return False
+    desc.boolean = True
+    desc.short_description = 'Descuento'
