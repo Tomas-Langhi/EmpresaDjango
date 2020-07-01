@@ -51,22 +51,14 @@ class Venta(models.Model):
     cliente = models.ForeignKey('Cliente', default = None, on_delete=models.CASCADE)
     producto = models.ForeignKey('Producto', default = None, on_delete=models.CASCADE)
     cantidad = models.IntegerField(null=False)
-    descuento = models.FloatField(null=True)
+    descuento = models.BooleanField(null=True)
     monto_final = models.FloatField(null = True)
 
     def __str__(self):
         return str(self.producto) + " Stock = " + str(self.cantidad)
     
-    #Para diferenciar si tiene descuento o no
-    def desc(self):
-        if self.descuento > 0:
-            return True
-        else:
-            return False
-    desc.boolean = True
-    desc.short_description = 'Descuento'
-
+    #Para calcular el monto final
     def precio_final(self):
-        self.monto_final =  (self.producto.precio * self.cantidad) - self.descuento
+        self.monto_final =  self.producto.precio * self.cantidad
         return self.monto_final
     precio_final.short_description = 'Precio Final'

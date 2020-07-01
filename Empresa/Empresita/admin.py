@@ -20,6 +20,9 @@ class ProductoAdmin(admin.ModelAdmin):
         }),
     )
 
+class ProductoInline(admin.TabularInline):
+    model = Producto
+    
 class ProveedorAdmin(admin.ModelAdmin):
     #Previsualizacion de datos
     list_display = ['nombre', 'rut', 'telefono', 'web', 'direccion']
@@ -27,12 +30,28 @@ class ProveedorAdmin(admin.ModelAdmin):
     #Filtro de busqueda
     search_fields = ['nombre', 'rut',]
 
+    inlines = [ProductoInline,]
+
 class VentaAdmin(admin.ModelAdmin):
     #previsualizacion de datos
-    list_display = ['cliente', 'producto', 'cantidad', 'desc', 'precio_final', 'fecha']
+    list_display = ['cliente', 'producto', 'cantidad', 'descuento', 'precio_final', 'fecha']
 
     #Para excluir atributos
     exclude = ['monto_final']
+
+    #Para poner o sacar decuentos
+    actions = ['desc', 'ndesc']
+
+    def desc(self, request, queryset):
+        return queryset.update(descuento = True)
+    desc.short_description = 'Con Descuento'
+
+    def ndesc(self, request, queryset):
+        return queryset.update(descuento = False)
+    ndesc.short_description = 'Sin Descuento'
+
+
+
 
 
 
