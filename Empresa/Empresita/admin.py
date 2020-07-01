@@ -6,6 +6,9 @@ class ClienteAdmin(admin.ModelAdmin):
     #Previsualizacion de datos
     list_display = ['nombre', 'telefono', 'rut',]
 
+    #Para buscar mediante palabras claves
+    search_fields = ['nombre', 'telefono', 'rut',]
+
 class ProductoAdmin(admin.ModelAdmin):
     #Para armar pestañas separando los datos
     fieldsets = (
@@ -22,7 +25,7 @@ class ProductoAdmin(admin.ModelAdmin):
 
 class ProductoInline(admin.TabularInline):
     model = Producto
-    
+
 class ProveedorAdmin(admin.ModelAdmin):
     #Previsualizacion de datos
     list_display = ['nombre', 'rut', 'telefono', 'web', 'direccion']
