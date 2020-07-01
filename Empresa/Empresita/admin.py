@@ -29,7 +29,10 @@ class ProveedorAdmin(admin.ModelAdmin):
 
 class VentaAdmin(admin.ModelAdmin):
     #previsualizacion de datos
-    list_display = ['cliente', 'producto', 'cantidad', 'desc', 'monto_final', 'fecha']
+    list_display = ['cliente', 'producto', 'cantidad', 'desc', 'precio_final', 'fecha']
+
+    #Para excluir atributos
+    exclude = ['monto_final']
 
 
 
